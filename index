@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yamaha PSR-E373 Voice List</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #111;
+        }
+
+        #searchBox {
+            width: 100%;
+            padding: 12px 16px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        #searchBox:focus {
+            border-color: #0066cc;
+        }
+
+        .voice-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .voice-table th, 
+        .voice-table td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .voice-table th {
+            background-color: #f4f4f4;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .voice-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .voice-table tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .col-no { width: 10%; }
+        .col-type { width: 30%; }
+        .col-name { width: 60%; }
+
+        .no-results {
+            text-align: center;
+            color: #777;
+            padding: 20px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. Header -->
+    <h1>Yamaha PSR-E373 Voice List</h1>
+
+    <!-- 2. Search Box -->
+    <input type="text" id="searchBox" placeholder="Type to filter by Number, Type, or Name..." oninput="filterList()">
+
+    <!-- 3. Data Display -->
+    <table class="voice-table">
+        <thead>
+            <tr>
+                <th class="col-no">No</th>
+                <th class="col-type">Type</th>
+                <th class="col-name">Name</th>
+            </tr>
+        </thead>
+        <tbody id="voiceListBody"></tbody>
+    </table>
+    
+    <div id="noResults" class="no-results">No matching voices found.</div>
+
+    <script>
+        // =========================================================================
+        // PASTE YOUR CSV DATA BELOW BETWEEN THE BACKTICKS (` `)
+        // Keep the header row (No,Type,Name) intact.
+        // =========================================================================
+	'No,Type,Name
+1,Piano,Live! Concert Grand Piano
+2,Piano,Grand Piano
+3,Piano,Bright Piano
+4,Piano,Harpsichord
+5,Piano,Honky Tonk Piano
+6,Piano,MIDI Grand Piano
+7,Piano,CP80
+8,E Piano,Cool! SuitcaseEP
+9,E Piano,JazzChorusEP
+10,E Piano,PhaseEP
+11,E Piano,Cool! TremoloEP
+12,E Piano,Cool! ElectricPiano
+13,E Piano,StageEP
+14,E Piano,Cool! Galaxy Electric Piano
+15,E Piano,Hyper Tines
+16,E Piano,Funky Electric Piano
+17,E Piano,DX Modern Electric Piano
+18,E Piano,Venus Electric Piano
+19,E Piano,Clavi
+20,E Piano,WahClavi
+21,Organ,Cool! Organ
+22,Organ,Cool! Rotor Organ
+23,Organ,Jazz Organ 1
+24,Organ,Jazz Organ 1 plus RotaryFast
+25,Organ,Jazz Organ 2
+26,Organ,Jazz Organ 2 plus RotaryFast
+27,Organ,Rock Organ
+28,Organ,Octave Shift Organ
+29,Organ,Purple Organ
+30,Organ,Click Organ
+31,Organ,Bright Organ
+32,Organ,Theater Organ
+33,Organ,16' plus 2' Organ
+34,Organ,16' plus 4' Organ
+35,Organ,Chapel Organ
+36,Organ,Pipe Organ
+37,Organ,Reed Organ
+38,Accordian,Musette Accordion
+39,Accordian,Traditional Accordion
+40,Accordian,Bandoneon
+41,Accordian,Modern Harp
+42,Accordian,Blues Harp
+43,Accordian,Harmonica
+44,Guitar,S.Art Lite (Nylon Harmonics)
+45,Guitar,S.Art Lite (Steel Hrmonics)
+46,Guitar,S.Art Lite (Nylon Slide)
+47,Guitar,S.Art Lite Steel Guitar Slide ***
+48,Guitar,S.Art Lite Distortion Guitar ***
+49,Guitar,Dynamic Nylon Guitar
+50,Guitar,Dynamic Overdriven
+51,Guitar,Dynamic Distortion Guitar
+52,Guitar,Nylon Guitar
+53,Guitar,Classical Guitar
+54,Guitar,Steel Guitar
+55,Guitar,Folk Guitar
+56,Guitar,Jazz Guitar
+57,Guitar,60s Clean Guitar
+58,Guitar,12Strings Guitar
+59,Guitar,Clean Guitar
+60,Guitar,Wah Guitar
+61,Guitar,Octave Guitar
+62,Guitar,Muted Guitar
+63,Guitar,Overdriven Guitar
+64,Guitar,Distortion Guitar
+65,Guitar,Wah Distortion Guitar
+66,Bass,S.Art Lite Slap Bass ***
+67,Bass,Dynamic Electric Bass
+68,Bass,Finger Bass
+69,Bass,Acoustic Bass
+70,Bass,Pick Bass
+71,Bass,Fretless Bass
+72,Bass,Slap Bass
+73,Bass,Funk Bass
+74,Bass,Synth Bass
+75,Bass,Hi-Q Bass
+76,Bass,Dance Bass
+77,Strings,S.Art Lite Strings ***
+78,Strings,Live! Strings
+79,Strings,Studio Strings
+80,Strings,Strings
+81,Strings,Chamber Strings
+82,Strings,Marcato Strings
+83,Strings,Slow Strings
+84,Strings,Tremolo Strings
+85,Strings,Synth Strings
+86,Strings,Pizzicato Strings
+87,Strings,Orchestra Pizzicato Strings
+88,Strings,Sweet! Violin
+89,Strings,Violin
+90,Strings,Cello
+91,Strings,Contrabass
+92,Strings,Harp
+93,Strings,Orchestra Hit
+94,Choir,S.Art Lite Gospel Choir ***
+95,Choir,Choir
+96,Choir,Gospel Hmm
+97,Choir,Gospel Wow
+98,Choir,Vocal Ensemble
+99,Choir,Air Choir
+100,Choir,Vox Humana
+101,Saxophone,S.Art Lite Tenor Sax ***
+102,Saxophone,Sax Section
+103,Saxophone,Sweet! Tenor Sax
+104,Saxophone,Tenor Sax
+105,Saxophone,Alto Sax
+106,Saxophone,Soprano Sax
+107,Saxophone,Baritone Sax
+108,Saxophone,Breathy Tenor Sax
+109,Saxophone,Small Sax Section
+110,Saxophone,Clarinet
+111,Saxophone,Oboe
+112,Saxophone,English Horn
+113,Saxophone,Bassoon
+114,Trumpet,Trumpet
+115,Trumpet,Distortion Trumpet
+116,Trumpet,Trombone
+117,Trumpet,Trombone Section
+118,Trumpet,Muted Trumpet
+119,Trumpet,French Horn
+120,Trumpet,Tuba
+121,Brass,S.Art Lite Brass Section ***
+122,Brass,Live! Brass
+123,Brass,Brass Section
+124,Brass,Big Band Brass
+125,Brass,Octave Brass
+126,Brass,80s Brass
+127,Brass,Mellow Horns
+128,Brass,Funky Brass
+129,Brass,Techno Brass
+130,Brass,Synth Brass
+131,Flute,S.Art Lite Flute ***
+132,Flute,Sweet! Flute
+133,Flute,Sweet! Classical Flute
+134,Flute,Flute
+135,Flute,Piccolo
+136,Flute,Pan Flute
+137,Flute,Recorder
+138,Flute,Ocarina
+139,Synth,Gemini
+140,Synth,Hands Up!
+141,Synth,Square Lead
+142,Synth,Sawtooth Lead
+143,Synth,RS Tech Saw
+144,Synth,Under Heim
+145,Synth,Portatone
+146,Synth,Analogon 1
+147,Synth,Fargo 1
+148,Synth,Analogon 2
+149,Synth,Fargo 2
+150,Synth,Voice Lead
+151,Synth,Funky Lead
+152,Synth,Sweet Heaven
+153,Synth,Dream Heaven
+154,Synth,Symbiont
+155,Synth,Stardust
+156,Synth,Brightness
+157,Synth,Xenon Pad
+158,Synth,Equinox
+159,Synth,Fantasia
+160,Synth,Dark Moon
+161,Synth,Bell Pad
+162,Synth,RS Analog Pad
+163,Synth,RS Short Resonance
+164,Percussion,Vibraphone
+165,Percussion,Jazz Vibes
+166,Percussion,Marimba
+167,Percussion,Xylophone
+168,Percussion,Steel Drums
+169,Percussion,Celesta
+170,Percussion,Music Box
+171,Percussion,Tubular Bells
+172,Percussion,Timpani
+173,World,Banjo
+174,World,Fiddle
+175,World,Bagpipe
+176,World,Dulcimer 1
+177,World,Dulcimer 2
+178,World,Cimbalom
+179,World,Santur
+180,World,Kanoon
+181,World,Oud
+182,World,Rabab
+183,World,Kalimba
+184,World,Harmonium 1 (Single Reed)
+185,World,Harmonium 2 (Double Reed)
+186,World,Harmonium 3 (Triple Reed)
+187,World,Tanpura
+188,World,Pungi
+189,World,Bansuri
+190,World,Sitar 1
+191,World,Detuned Sitar
+192,World,Sitar 2
+193,World,Shehnai
+194,World,Gopichant
+195,World,Tabla
+196,World,Er Hu
+197,World,Di Zi
+198,World,Pi Pa
+199,World,Gu Zheng
+200,World,Yang Qin
+201,World,Morin Khuur
+202,World,Suling
+203,World,Shamisen
+204,World,Koto
+205,World,Taisho-kin
+206,Dual,Octave Piano
+207,Dual,Piano and Strings
+208,Dual,Piano Pad
+209,Dual,Octave Harpsichord
+210,Dual,Tiny Electric Piano
+211,Dual,Electric Piano Pad
+212,Dual,Full Organ
+213,Dual,Octave Jazz Guitar
+214,Dual,Octave Strings
+215,Dual,Orchestra Section
+216,Dual,Octave Pizzicato Strings
+217,Dual,Strings Session
+218,Dual,Brass Tutti
+219,Dual,Orchestra Tutti
+220,Dual,Octave French Horns
+221,Dual,Octave Harp
+222,Dual,Orchestra Hit and Timpani
+223,Dual,Octave Choir
+224,Dual,Jazz Brass Section
+225,Dual,Jazz Section
+226,Dual,Ballroom Sax Ensemble
+227,Dual,Ballroom Brass
+228,Dual,Flute and Clarinet
+229,Dual,Trumpet and Trombone
+230,Dual,Fat Synth Brass
+231,Dual,Octave Lead
+232,Dual,Super 5th Lead
+233,Sound Effect,Fret Noise
+234,Sound Effect,Breath Noise
+235,Sound Effect,Seashore
+236,Sound Effect,Bird Tweet
+237,Sound Effect,Telephone Ring
+238,Sound Effect,Helicopter
+239,Sound Effect,Applause
+240,Sound Effect,Hand Clap
+241,Sound Effect,Gunshot
+242,Drum Kit,Power Kit
+243,Drum Kit,Standard Kit 1
+244,Drum Kit,Standard Kit 2
+245,Drum Kit,Room Kit
+246,Drum Kit,Rock Kit
+247,Drum Kit,Electronic Kit
+248,Drum Kit,Analog Kit
+249,Drum Kit,Dance Kit
+250,Drum Kit,Jazz Kit
+251,Drum Kit,Brush Kit
+252,Drum Kit,Symphony Kit
+253,Drum Kit,StdKit 1 plus Chinese Perc.
+254,Drum Kit,Indian Kit 1
+255,Drum Kit,Indian Kit 2
+256,Drum Kit,StdKit 1 plus Indonesian Perc. 1
+257,Drum Kit,StdKit 1 plus Indonesian Perc. 2
+258,Drum Kit,StdKit 1 plus Indonesian Perc. 3
+259,Drum Kit,Arabic Kit
+260,Drum Kit,Cuban Kit
+261,Drum Kit,SFX Kit 1
+262,Drum Kit,SFX Kit 2
+263,Drum Kit,Sound Effect Kit
+264,Apreggio,Concerto
+265,Apreggio,Latin Rock
+266,Apreggio,Brass Section
+267,Apreggio,Piano Ballad
+268,Apreggio,Synth Sequence
+269,Apreggio,Guitarist
+270,Apreggio,Pickin'
+271,Apreggio,Spanish
+272,Apreggio,Funky Clavi
+273,Apreggio,Harpeggio
+274,Apreggio,Finger Bass Left
+275,Apreggio,Combo Jazz Left
+276,Apreggio,Paul's Bass Left
+277,Apreggio,Trance Bass Left
+278,Apreggio,Acid Bass Left
+279,Apreggio,Piano Ballad Left
+280,Apreggio,Salsa Piano Left
+281,Apreggio,Piano Arpeggio Left
+282,Apreggio,Guitar Arpeggio Left
+283,Apreggio,Strum Left
+284,XG Piano,Grand Piano
+285,XG Piano,Grand Piano KSP
+286,XG Piano,Piano Strings
+287,XG Piano,Dream
+288,XG Piano,Bright Piano
+289,XG Piano,Bright Piano KSP
+290,XG Piano,Electric Grand Piano
+291,XG Piano,Electric Grand Piano KSP
+292,XG Piano,Detuned CP80
+293,XG Piano,Honky Tonk Piano
+294,XG Piano,Honky Tonk Piano KSP
+295,XG Piano,Electric Piano 1
+296,XG Piano,Electric Piano 1 KSP
+297,XG Piano,Chorus Electric Piano 1
+298,XG Piano,Electric Piano 2
+299,XG Piano,Electric Piano 2 KSP
+300,XG Piano,Chorus Electric Piano 2
+301,XG Piano,DX plus Analog Electric Piano
+302,XG Piano,Harpsichord 1
+303,XG Piano,Harpsichord KSP
+304,XG Piano,Harpsichord 2
+305,XG Piano,Clavi
+306,XG Piano,Clavi KSP
+307,XG Chromatic,Celesta
+308,XG Chromatic,Glockenspiel
+309,XG Chromatic,Music Box 1
+310,XG Chromatic,Music Box 2
+311,XG Chromatic,Vibraphone
+312,XG Chromatic,Vibraphone KSP
+313,XG Chromatic,Marimba
+314,XG Chromatic,Marimba KSP
+315,XG Chromatic,Sine Marimba
+316,XG Chromatic,Balimba
+317,XG Chromatic,Log Drums
+318,XG Chromatic,Xylophone
+319,XG Chromatic,Tubular Bells
+320,XG Chromatic,Church Bells
+321,XG Chromatic,Carillon
+322,XG Organ,Drawbar Organ 1
+323,XG Organ,Detuned Drawbar Organ
+324,XG Organ,60s Drawbar Organ 1
+325,XG Organ,60s Drawbar Organ 2
+326,XG Organ,70s Drawbar Organ 1
+327,XG Organ,60s Drawbar Organ 3
+328,XG Organ,16 plus 2'2/3 Organ
+329,XG Organ,Organ Bass
+330,XG Organ,70s Drawbar Organ 2
+331,XG Organ,Cheezy Organ
+332,XG Organ,Drawbar Organ 2
+333,XG Organ,Percussive Organ 1
+334,XG Organ,70s Percussive Organ
+335,XG Organ,Detuned Percussive Organ
+336,XG Organ,Light Organ
+337,XG Organ,Percussive Organ 2
+338,XG Organ,Rock Organ
+339,XG Organ,Rotary Organ
+340,XG Organ,Slow Rotary Organ
+341,XG Organ,Fast Rotary Organ
+342,XG Organ,Church Organ 1
+343,XG Organ,Church Organ 3
+344,XG Organ,Church Organ 2
+345,XG Organ,Notre Dame
+346,XG Organ,Organ Flute
+347,XG Organ,Tremolo Organ Flute
+348,XG Organ,Reed Organ
+349,XG Organ,Puff Organ
+350,XG Organ,Accordion
+351,XG Organ,Harmonica 1
+352,XG Organ,Harmonica 2
+353,XG Organ,Tango Accordion 1
+354,XG Organ,Tango Accordion 2
+355,XG Guitar,Nylon Guitar 1
+356,XG Guitar,Nylon Guitar 3
+357,XG Guitar,Velocity Guitar Harmonics
+358,XG Guitar,Ukulele
+359,XG Guitar,Steel Guitar
+360,XG Guitar,12-string Guitar
+361,XG Guitar,Nylon and Steel Guitar
+362,XG Guitar,Steel Guitar with Body Sound
+363,XG Guitar,Mandolin
+364,XG Guitar,Jazz Guitar
+365,XG Guitar,Jazz Amp
+366,XG Guitar,Clean Guitar
+367,XG Guitar,Chorus Guitar
+368,XG Guitar,Muted Guitar
+369,XG Guitar,Funk Guitar
+370,XG Guitar,Muted Steel Guitar
+371,XG Guitar,Jazz Man
+372,XG Guitar,Overdriven Guitar
+373,XG Guitar,Guitar Pinch
+374,XG Guitar,Distortion Guitar
+375,XG Guitar,Feedback Guitar 1
+376,XG Guitar,Feedback Guitar 2
+377,XG Guitar,Guitar Harmonics 1
+378,XG Guitar,Guitar Feedback
+379,XG Guitar,Guitar Harmonics 2
+380,XG Bass,Acoustic Bass
+381,XG Bass,Jazz Rhythm
+382,XG Bass,Velocity Crossfade Upright Bass
+383,XG Bass,Finger Bass 1
+384,XG Bass,Finger Bass Dark
+385,XG Bass,Bass and Distorted Electric Guitar
+386,XG Bass,Finger Slap Bass
+387,XG Bass,Finger Bass 2
+388,XG Bass,Modulated Bass
+389,XG Bass,Pick Bass
+390,XG Bass,Muted Pick Bass
+391,XG Bass,Fretless Bass 1
+392,XG Bass,Fretless Bass 2
+393,XG Bass,Fretless Bass 3
+394,XG Bass,Fretless Bass 4
+395,XG Bass,Slap Bass 1
+396,XG Bass,Punch Thumb Bass
+397,XG Bass,Slap Bass 2
+398,XG Bass,Velocity Switch Slap
+399,XG Bass,Synth Bass 1
+400,XG Bass,Techno Synth Bass
+401,XG Bass,Synth Bass 2
+402,XG Bass,Mellow Synth Bass
+403,XG Bass,Sequenced Bass
+404,XG Bass,Click Synth Bass
+405,XG Bass,Synth Bass 2 Dark
+406,XG Bass,Modular Synth Bass
+407,XG Bass,DX Bass
+408,XG Strings,Violin
+409,XG Strings,Slow Violin
+410,XG Strings,Viola
+411,XG Strings,Cello
+412,XG Strings,Contrabass
+413,XG Strings,Tremolo Strings
+414,XG Strings,Slow Tremolo Strings
+415,XG Strings,Suspense Strings
+416,XG Strings,Pizzicato Strings
+417,XG Strings,Orchestral Harp
+418,XG Strings,Timpani
+419,XG Ensemble,Strings 1
+420,XG Ensemble,Stereo Strings
+421,XG Ensemble,Slow Strings
+422,XG Ensemble,60s Strings
+423,XG Ensemble,Orchestra 1
+424,XG Ensemble,Orchestra 2
+425,XG Ensemble,Tremolo Orchestra
+426,XG Ensemble,Velocity Strings
+427,XG Ensemble,Strings 2
+428,XG Ensemble,Stereo Slow Strings
+429,XG Ensemble,Legato Strings
+430,XG Ensemble,Warm Strings
+431,XG Ensemble,Kingdom
+432,XG Ensemble,Synth Strings 1
+433,XG Ensemble,Synth Strings 4
+434,XG Ensemble,Synth Strings 2
+435,XG Ensemble,Choir Aahs
+436,XG Ensemble,Stereo Choir
+437,XG Ensemble,Mellow Choir
+438,XG Ensemble,Choir Strings
+439,XG Ensemble,Voice Oohs
+440,XG Ensemble,Synth Voice 1
+441,XG Ensemble,Synth Voice 2
+442,XG Ensemble,Choral
+443,XG Ensemble,Analog Voice
+444,XG Ensemble,Orchestra Hit 1
+445,XG Ensemble,Orchestra Hit 2
+446,XG Ensemble,Impact
+447,XG Brass,Trumpet
+448,XG Brass,Warm Trumpet
+449,XG Brass,Trombone 1
+450,XG Brass,Trombone 2
+451,XG Brass,Tuba
+452,XG Brass,Muted Trumpet
+453,XG Brass,French Horn 1
+454,XG Brass,French Horn Solo
+455,XG Brass,French Horn 2
+456,XG Brass,Horn Orchestra
+457,XG Brass,Brass Section
+458,XG Brass,Trumpet and Trombone Section
+459,XG Brass,Synth Brass 1
+460,XG Brass,Resonant Synth Brass
+461,XG Brass,Synth Brass 2
+462,XG Brass,Soft Brass
+463,XG Brass,Choir Brass
+464,XG Reed,Soprano Sax
+465,XG Reed,Alto Sax
+466,XG Reed,Sax Section
+467,XG Reed,Tenor Sax
+468,XG Reed,Breathy Tenor Sax
+469,XG Reed,Baritone Sax
+470,XG Reed,Oboe
+471,XG Reed,English Horn
+472,XG Reed,Bassoon
+473,XG Reed,Clarinet
+474,XG Pipe,Piccolo
+475,XG Pipe,Flute
+476,XG Pipe,Recorder
+477,XG Pipe,Pan Flute
+478,XG Pipe,Blown Bottle
+479,XG Pipe,Whistle
+480,XG Pipe,Ocarina
+481,XG Synth Lead,Square Lead 1
+482,XG Synth Lead,Square Lead 2
+483,XG Synth Lead,LM Square
+484,XG Synth Lead,Hollow
+485,XG Synth Lead,Shroud
+486,XG Synth Lead,Mellow
+487,XG Synth Lead,Solo Sine
+488,XG Synth Lead,Sine Lead
+489,XG Synth Lead,Sawtooth Lead 1
+490,XG Synth Lead,Sawtooth Lead 2
+491,XG Synth Lead,Thick Sawtooth
+492,XG Synth Lead,Dynamic Sawtooth
+493,XG Synth Lead,Digital Sawtooth
+494,XG Synth Lead,Big Lead
+495,XG Synth Lead,Heavy Synth
+496,XG Synth Lead,Sequenced Analog
+497,XG Synth Lead,Calliope Lead
+498,XG Synth Lead,Pure Lead
+499,XG Synth Lead,Chiff Lead
+500,XG Synth Lead,Charang Lead
+501,XG Synth Lead,Distorted Lead
+502,XG Synth Lead,Voice Lead
+503,XG Synth Lead,Fifths Lead
+504,XG Synth Lead,Big Five
+505,XG Synth Lead,Bass and Lead
+506,XG Synth Lead,Big and Low
+507,XG Synth Lead,Fat and Perky
+508,XG Synth Lead,Soft Whirl
+509,XG Synth Pad,New Age Pad
+510,XG Synth Pad,Fantasy
+511,XG Synth Pad,Warm Pad
+512,XG Synth Pad,Poly Synth Pad
+513,XG Synth Pad,Choir Pad
+514,XG Synth Pad,Itopia
+515,XG Synth Pad,Bowed Pad
+516,XG Synth Pad,Metallic Pad
+517,XG Synth Pad,Halo Pad
+518,XG Synth Pad,Sweep Pad
+519,XG Synth Effects,Rain
+520,XG Synth Effects,Harmo Rain
+521,XG Synth Effects,African Wind
+522,XG Synth Effects,Carib
+523,XG Synth Effects,Sound Track
+524,XG Synth Effects,Prologue
+525,XG Synth Effects,Crystal
+526,XG Synth Effects,Synth Drum Comp
+527,XG Synth Effects,Popcorn
+528,XG Synth Effects,Tiny Bells
+529,XG Synth Effects,Round Glockenspiel
+530,XG Synth Effects,Glockenspiel Chimes
+531,XG Synth Effects,Clear Bells
+532,XG Synth Effects,Chorus Bells
+533,XG Synth Effects,Soft Crystal
+534,XG Synth Effects,Air Bells
+535,XG Synth Effects,Bell Harp
+536,XG Synth Effects,Gamelimba
+537,XG Synth Effects,Atmosphere
+538,XG Synth Effects,Warm Atmosphere
+539,XG Synth Effects,Hollow Release
+540,XG Synth Effects,Nylon Electric Piano
+541,XG Synth Effects,Nylon Harp
+542,XG Synth Effects,Harp Vox
+543,XG Synth Effects,Atmosphere Pad
+544,XG Synth Effects,Brightness
+545,XG Synth Effects,Goblins
+546,XG Synth Effects,Goblins Synth
+547,XG Synth Effects,Creeper
+548,XG Synth Effects,Ritual
+549,XG Synth Effects,To Heaven
+550,XG Synth Effects,Night
+551,XG Synth Effects,Glisten
+552,XG Synth Effects,Bell Choir
+553,XG Synth Effects,Echoes
+554,XG Synth Effects,Big Pan
+555,XG Synth Effects,Sci-Fi
+556,XG World,Shakuhachi
+557,XG World,Tamboura
+558,XG World,Banjo
+559,XG World,Muted Banjo
+560,XG Percussive,Tinkle Bell
+561,XG Percussive,Bonang
+562,XG Percussive,Altair
+563,XG Percussive,Gamelan Gongs
+564,XG Percussive,Stereo Gamelan Gongs
+565,XG Percussive,Rama Cymbal
+566,XG Percussive,Agogo
+567,XG Percussive,Steel Drums
+568,XG Percussive,Glass Percussion
+569,XG Percussive,Thai Bells
+570,XG Percussive,Woodblock
+571,XG Percussive,Castanets
+572,XG Percussive,Taiko Drum
+573,XG Percussive,Gran Cassa
+574,XG Percussive,Melodic Tom 1
+575,XG Percussive,Melodic Tom 2
+576,XG Percussive,Real Tom
+577,XG Percussive,Rock Tom
+578,XG Percussive,Synth Drum
+579,XG Percussive,Analog Tom
+580,XG Percussive,Electronic Percussion
+581,XG Percussive,Reverse Cymbal
+582,XG Sound Effects,Cutting Noise 1
+583,XG Sound Effects,Cutting Noise 2
+584,XG Sound Effects,String Slap
+585,XG Sound Effects,Flute Key Click
+586,XG Sound Effects,Shower
+587,XG Sound Effects,Thunder
+588,XG Sound Effects,Wind
+589,XG Sound Effects,Stream
+590,XG Sound Effects,Bubble
+591,XG Sound Effects,Feed
+592,XG Sound Effects,Dog
+593,XG Sound Effects,Horse
+594,XG Sound Effects,Bird Tweet 2
+595,XG Sound Effects,Maou
+596,XG Sound Effects,Phone Call
+597,XG Sound Effects,Door Squeak
+598,XG Sound Effects,Door Slam
+599,XG Sound Effects,Scratch Cut
+600,XG Sound Effects,Scratch Split
+601,XG Sound Effects,Wind Chime
+602,XG Sound Effects,Telephone Ring 2
+603,XG Sound Effects,Car Engine Ignition
+604,XG Sound Effects,Car Tires Squeal
+605,XG Sound Effects,Car Passing
+606,XG Sound Effects,Car Crash
+607,XG Sound Effects,Siren
+608,XG Sound Effects,Train
+609,XG Sound Effects,Jet Plane
+610,XG Sound Effects,Starship
+611,XG Sound Effects,Burst
+612,XG Sound Effects,Roller Coaster
+613,XG Sound Effects,Submarine
+614,XG Sound Effects,Laugh
+615,XG Sound Effects,Scream
+616,XG Sound Effects,Punch
+617,XG Sound Effects,Heartbeat
+618,XG Sound Effects,Footsteps
+619,XG Sound Effects,Machine Gun
+620,XG Sound Effects,Laser Gun
+621,XG Sound Effects,Explosion
+622,XG Sound Effects,Firework'
+        const rawCsvData = `No,Type,Name
+1,Piano,Live! Concert Grand Piano
+2,Piano,Grand Piano
+3,Piano,Bright Piano`;
+        // =========================================================================
+
+        let voices = [];
+
+        // Simple CSV Parser
+        function parseCSV(csvText) {
+            const lines = csvText.trim().split('\n');
+            const data = [];
+            // Skip header row (i = 1)
+            for (let i = 1; i < lines.length; i++) {
+                if (!lines[i].trim()) continue;
+                const [no, type, name] = lines[i].split(',');
+                data.push({
+                    no: no ? no.trim() : '',
+                    type: type ? type.trim() : '',
+                    name: name ? name.trim() : ''
+                });
+            }
+            return data;
+        }
+
+        // Render table rows dynamically
+        function renderList(items) {
+            const tbody = document.getElementById('voiceListBody');
+            const noResults = document.getElementById('noResults');
+            tbody.innerHTML = '';
+
+            if (items.length === 0) {
+                noResults.style.display = 'block';
+                return;
+            }
+
+            noResults.style.display = 'none';
+            const fragment = document.createDocumentFragment();
+
+            items.forEach(item => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td class="col-no">${item.no}</td>
+                    <td class="col-type">${item.type}</td>
+                    <td class="col-name">${item.name}</td>
+                `;
+                fragment.appendChild(tr);
+            });
+
+            tbody.appendChild(fragment);
+        }
+
+        // Wildcard search function across all 3 fields
+        function filterList() {
+            const query = document.getElementById('searchBox').value.toLowerCase().trim();
+            
+            if (!query) {
+                renderList(voices);
+                return;
+            }
+
+            const filtered = voices.filter(item => 
+                item.no.toLowerCase().includes(query) ||
+                item.type.toLowerCase().includes(query) ||
+                item.name.toLowerCase().includes(query)
+            );
+
+            renderList(filtered);
+        }
+
+        // Initial setup on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            voices = parseCSV(rawCsvData);
+            renderList(voices);
+        });
+    </script>
+</body>
+</html>
